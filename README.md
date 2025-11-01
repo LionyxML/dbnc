@@ -13,9 +13,9 @@ Goals:
 - [ ] Alter the web page to contain a small editor from which the compiler will
       read.
 
-For the parser:
+For the compiler:
 
-- [ ] Lexer
+- [x] Lexer
 - [ ] Parser
 - [ ] Transformer
 - [ ] Generator
