@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"strings"
 
@@ -12,11 +11,13 @@ import (
 
 func main() {
 
+	cliLogger := logx.New("[dbnc]", "debug", true)
+
 	filename := os.Args
-	checks.CheckArgs(filename)
+	checks.CheckArgs(filename, cliLogger)
 
 	file, err := os.ReadFile(filename[1])
-	checks.Check(err, 0, "Cannot read the provided file... bye!")
+	checks.CheckErr(err, 0, "Cannot read the provided file... bye!", cliLogger)
 
 	lines := strings.SplitSeq(string(file), "\n")
 
@@ -24,7 +25,7 @@ func main() {
 		lexed, ok := lexer.Lexer(line)
 
 		if ok {
-			logx.LogInfo(fmt.Sprintf("%+v\n", lexed))
+			cliLogger.Debug("%+v", lexed)
 		}
 	}
 

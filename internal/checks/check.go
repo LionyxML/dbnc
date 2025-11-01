@@ -7,24 +7,24 @@ import (
 	"github.com/LionyxML/dbnc/internal/logx"
 )
 
-func Check(err error, code int, msg string) {
+func CheckErr(err error, code int, msg string, logger logx.Logger) {
 	if err != nil {
-		logx.LogError(fmt.Sprintf(">>> %+v\n", err))
-		logx.LogError(fmt.Sprintf(">>> %s\n", msg))
+		logger.Error(">>> %+v", err)
+		logger.Error(">>> %s", msg)
 		os.Exit(code)
 	}
 }
 
-func CheckArgs(args []string) {
+func CheckArgs(args []string, logger logx.Logger) {
 	argsLenght := len(args)
 	msg := "Error while reading program arguments"
 
 	if (argsLenght) > 2 {
-		Check(fmt.Errorf("More than 1 argument provided"), 1, msg)
+		CheckErr(fmt.Errorf("More than 1 argument provided"), 1, msg, logger)
 	}
 
 	if (argsLenght) <= 1 {
-		Check(fmt.Errorf("No argument provided"), 2, msg)
+		CheckErr(fmt.Errorf("No argument provided"), 2, msg, logger)
 	}
 
 	if len(args) != 2 {
