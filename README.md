@@ -30,3 +30,13 @@ For the project:
 
 - [ ] Use only built-in go features
 - [ ] Exception to make and Makefile to store all commands
+
+## Run the compiler cli
+
+### While developing
+
+Use:
+
+```go
+go run ./cmd/dbnc/main.go ./docs/example_programs/prog01.dbn
+```
