@@ -2,7 +2,6 @@ package main
 
 import (
 	"os"
-	"strings"
 
 	"github.com/LionyxML/dbnc/internal/checks"
 	"github.com/LionyxML/dbnc/internal/lexer"
@@ -19,14 +18,12 @@ func main() {
 	file, err := os.ReadFile(filename[1])
 	checks.CheckErr(err, 0, "Cannot read the provided file... bye!", cliLogger)
 
-	lines := strings.SplitSeq(string(file), "\n")
+	_, ok := lexer.Lexer(file, cliLogger)
 
-	for line := range lines {
-		lexed, ok := lexer.Lexer(line)
-
-		if ok {
-			cliLogger.Debug("%+v", lexed)
-		}
+	if ok {
+		cliLogger.Debug("It worked!")
+	} else {
+		cliLogger.Error("Oh no, something went wrong")
 	}
 
 }

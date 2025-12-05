@@ -45,9 +45,16 @@ func parseLevel(levelStr string) level {
 
 // Logger defines the interface for logging operations.
 type Logger interface {
+	// Logs in Debug level
 	Debug(format string, v ...any)
+
+	// Logs in Info level
 	Info(format string, v ...any)
+
+	// Logs in Warn level
 	Warn(format string, v ...any)
+
+	// Logs in Error level
 	Error(format string, v ...any)
 }
 
@@ -77,7 +84,6 @@ func (l *loggerImpl) colorize(color, msg string) string {
 	return msg
 }
 
-// Logs in Debug level
 func (l *loggerImpl) Debug(format string, v ...any) {
 	if l.level <= levelDebug {
 		msg := fmt.Sprintf(format, v...)
@@ -85,7 +91,6 @@ func (l *loggerImpl) Debug(format string, v ...any) {
 	}
 }
 
-// Logs in Info level
 func (l *loggerImpl) Info(format string, v ...any) {
 	if l.level <= levelInfo {
 		msg := fmt.Sprintf(format, v...)
@@ -93,7 +98,6 @@ func (l *loggerImpl) Info(format string, v ...any) {
 	}
 }
 
-// Logs in Warn level
 func (l *loggerImpl) Warn(format string, v ...any) {
 	if l.level <= levelWarn {
 		msg := fmt.Sprintf(format, v...)
@@ -101,7 +105,6 @@ func (l *loggerImpl) Warn(format string, v ...any) {
 	}
 }
 
-// Logs in Error level
 func (l *loggerImpl) Error(format string, v ...any) {
 	if l.level <= levelError {
 		msg := fmt.Sprintf(format, v...)
